@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Formulir Evaluasi Relasi - Universitas Dinamika Rasa</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
@@ -151,6 +151,76 @@
       flex-wrap: wrap;
     }
     .hidden { display: none; }
+
+    /* RESPONSIVE SETTINGS */
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+        margin: 20px 10px;
+      }
+
+      .kop-logo {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .kop-logo img {
+        width: 60px;
+        height: 60px;
+      }
+
+      .kop-text h1 {
+        font-size: 16px;
+      }
+
+      .kop-text p {
+        font-size: 12px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      label {
+        font-size: 14px;
+      }
+
+      input, select {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 12px;
+      }
+
+      .result {
+        font-size: 14px;
+        padding: 20px;
+      }
+
+      .judul-surat {
+        font-size: 16px;
+      }
+
+      .kop-surat h3 {
+        font-size: 16px;
+      }
+
+      .kop-surat p {
+        font-size: 12px;
+      }
+
+      .button-group {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .result::before {
+        background-size: 200px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -300,5 +370,4 @@ function resetForm() {
 }
 </script>
 </body>
-
 </html>
