@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulir Evaluasi Relasi - Universitas Dinamika Rasa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      font-family: 'Inter', sans-serif;
+      background: #f5f7fa;
+      color: #1a1a1a;
+      height: 100%;
+    }
+    header {
+      background: #fff;
+      color: #1a1a1a;
+      padding: 20px 0;
+      border-bottom: 3px solid #002147;
+      text-align: center;
+    }
+    .kop-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .kop-logo img {
+      width: 100px;
+      height: 100px;
+    }
+    .kop-text {
+      text-align: center;
+    }
+    .kop-text h1 {
+      font-size: 20px;
+      margin: 0;
+      font-weight: 700;
+    }
+    .kop-text p {
+      font-size: 14px;
+      margin: 2px 0;
+    }
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 40px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 20px;
+      color: #002147;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #fafafa;
+      font-size: 1em;
+    }
+    button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      background: #002147;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background: #021b37;
+    }
+    .result {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      border: 2px solid #002147;
+      margin-top: 30px;
+      line-height: 1.7;
+      font-size: 16px;
+      position: relative;
+    }
+    .result::before {
+      content: "";
+      background-image: url('LOGO.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 300px;
+      opacity: 0.05;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 0;
+    }
+    .result > * {
+      position: relative;
+      z-index: 1;
+    }
+    .kop-surat {
+      text-align: center;
+      border-bottom: 2px solid #002147;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .kop-surat img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+    .kop-surat h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .kop-surat p {
+      margin: 2px 0;
+      font-size: 14px;
+    }
+    .judul-surat {
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+      margin: 20px 0;
+      text-decoration: underline;
+    }
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="kop-logo">
+      <img src="LOGO.png" alt="Logo Kampus">
+      <div class="kop-text">
+        <h1>UNIVERSITAS DINAMIKA RASA</h1>
+        <p>Fakultas Hubungan Emosional</p>
+        <p>Jl. Kenangan No. 1, Kota Harapan, Indonesia</p>
+        <p>Website: www.dinamika-rasa.ac.id | Email: info@dinamika-rasa.ac.id</p>
+      </div>
+    </div>
+    <hr style="border: 1px solid #002147; margin: 10px 0;">
+    <p><strong>Formulir Evaluasi Relasi Tanpa Status</strong></p>
+  </header>
+
+  <div class="container" id="form-section">
+    <h2>Formulir Evaluasi Relasi Mahasiswa</h2>
+    <label for="nama">Nama Lengkap</label>
+    <input type="text" id="nama" />
+
+    <label for="kenangan">Kapan kamu mulai merasa nyaman ngobrol sama dia?</label>
+    <input type="text" id="kenangan" />
+
+    <label for="status">Satu kata untuk hubungan kalian saat ini</label>
+    <input type="text" id="status" />
+
+    <label for="kangen">Jika komunikasi berhenti, apakah kamu akan merasa kehilangan?</label>
+    <select id="kangen">
+      <option value="">-- Pilih salah satu --</option>
+      <option>Banget. Tapi gak tahu harus apa.</option>
+      <option>Iya, tapi aku gak akan bilang.</option>
+      <option>Kayaknya... iya.</option>
+    </select>
+
+    <button onclick="generateSurat()">Lihat Hasil Evaluasi</button>
+  </div>
+
+  <div class="container hidden" id="surat-section">
+    <h2>Hasil Evaluasi Relasi</h2>
+    <div class="result" id="isiSurat"></div>
+    <div class="button-group">
+      <button onclick="copySurat()">Salin</button>
+      <button onclick="downloadPDF()">Unduh PDF</button>
+      <button onclick="resetForm()">Evaluasi Ulang</button>
+    </div>
+  </div>
+
+<script>
+function generateSurat() {
+  const nama = document.getElementById("nama").value;
+  const kenangan = document.getElementById("kenangan").value;
+  const status = document.getElementById("status").value;
+  const kangen = document.getElementById("kangen").value;
+
+  if (!nama || !kenangan || !status || !kangen) {
+    alert("Harap lengkapi semua isian.");
+    return;
+  }
+
+  let kesimpulan = "";
+  switch (kangen) {
+    case "Banget. Tapi gak tahu harus apa.":
+      kesimpulan = `Ada keterikatan emosional yang dalam namun tidak tersalurkan. Hal ini menunjukkan bahwa kamu merasa kehilangan secara intens, namun terjebak dalam ketidakpastian langkah. Disarankan untuk mempertimbangkan keberanian mengutarakan isi hati, meski tanpa harapan pasti.`;
+      break;
+    case "Iya, tapi aku gak akan bilang.":
+      kesimpulan = `Ada konflik antara perasaan dan ekspresi. Kamu jelas merasa kehilangan, tapi memilih untuk memendam. Relasi ini berjalan dalam bayang-bayang harapan yang tertahan. Komunikasi jujur bisa jadi kunci membuka kejelasan.`;
+      break;
+    case "Kayaknya... iya.":
+      kesimpulan = `Perasaanmu masih ambigu, namun jelas ada nilai terhadap relasi ini. Kamu mungkin belum menyadari betapa dalam keterikatan yang terjalin. Saran kami: refleksikan kembali makna keberadaannya dalam hidupmu, sebelum semuanya jadi terlambat.`;
+      break;
+    default:
+      kesimpulan = "Kesimpulan tidak tersedia karena pilihan tidak dikenali.";
+  }
+
+  const qrData = encodeURIComponent(`${nama} - ${status} - ${kangen}`);
+  const qrImage = `https://quickchart.io/qr?text=${qrData}&size=120`;
+
+  const isiHTML = `
+  <div class="kop-surat">
+    <img src="LOGO.png" alt="Logo Kampus">
+    <h3>UNIVERSITAS DINAMIKA RASA</h3>
+    <p>Fakultas Hubungan Emosional</p>
+    <p>Jl. Kenangan No. 1, Kota Harapan, Indonesia</p>
+  </div>
+  <div class="judul-surat">HASIL EVALUASI RELASI TANPA STATUS</div>
+  <p><strong>Nama:</strong> ${nama}</p>
+  <p><strong>Titik kenyamanan mulai terasa saat:</strong> ${kenangan}</p>
+  <p><strong>Karakter relasi saat ini (satu kata):</strong> "${status}"</p>
+  <p><strong>Jika komunikasi berhenti:</strong> "${kangen}"</p>
+  <p><strong>Kesimpulan:</strong></p>
+  <p>${kesimpulan}</p>
+  <br><br>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px;">
+    <div>
+      <p>Mengetahui,</p>
+      <p>Dekan Fakultas Hubungan Emosional</p>
+      <img src="TTD.png" alt="Tanda Tangan" style="width: 120px; margin: 10px 0;">
+      <p><strong>Dr. JeyMinHoo</strong></p>
+    </div>
+    <div>
+      <p style="font-size: 12px; text-align: center;">Scan untuk validasi</p>
+      <img src="${qrImage}" alt="QR Code Validasi" />
+    </div>
+  </div>
+  `;
+
+  document.getElementById("form-section").classList.add("hidden");
+  document.getElementById("surat-section").classList.remove("hidden");
+  document.getElementById("isiSurat").innerHTML = isiHTML;
+}
+
+function copySurat() {
+  const text = document.getElementById("isiSurat").innerText;
+  navigator.clipboard.writeText(text).then(() => alert("Surat disalin ke clipboard."));
+}
+
+function downloadPDF() {
+  const element = document.getElementById("isiSurat");
+  const clone = element.cloneNode(true);
+  const wrapper = document.createElement("div");
+  wrapper.appendChild(clone);
+  wrapper.style.padding = "20px";
+  wrapper.style.fontFamily = "Inter, sans-serif";
+  wrapper.style.color = "#000";
+  wrapper.style.background = "#fff";
+
+  const opt = {
+    margin: 0.5,
+    filename: 'evaluasi-relasi.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+
+  html2pdf().from(wrapper).set(opt).save();
+}
+
+function resetForm() {
+  document.getElementById("form-section").classList.remove("hidden");
+  document.getElementById("surat-section").classList.add("hidden");
+  document.getElementById("nama").value = "";
+  document.getElementById("kenangan").value = "";
+  document.getElementById("status").value = "";
+  document.getElementById("kangen").value = "";
+}
+</script>
+</body>
+</html>
